@@ -109,7 +109,7 @@ async function run(): Promise<void> {
       throw Error(messageToPost)
     }
   } catch (error) {
-    core.setFailed(error)
+    core.setFailed(error as Error)
   }
 }
 
@@ -154,7 +154,7 @@ async function findComment(
   })
 
   for (const comment of comments.data) {
-    if (comment.body.startsWith(identifier)) {
+    if (comment?.body?.startsWith(identifier)) {
       return comment.id
     }
   }
